@@ -74,7 +74,12 @@ jobs:
         with:
           bun-version: latest
       - name: 复制首页
-        run:  cp -a docs/README.md docs/index.md         
+        run:  cp -a docs/README.md docs/index.md
+      - name: 修复 mu-lu.md 自引用问题
+        run: |
+          # 移除 mu-lu.md 中的自引用行
+          sed -i '/\* \[目录\](mu-lu.md)/d' docs/mu-lu.md
+          echo "已移除 mu-lu.md 中的自引用"
       - name: Install dependencies
         run:  bun install
       - name: Build with VitePress
