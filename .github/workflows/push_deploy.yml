@@ -77,9 +77,11 @@ jobs:
         run:  cp -a docs/README.md docs/index.md
       - name: 修复 mu-lu.md 自引用问题
         run: |
-          # 移除 mu-lu.md 中的自引用行
+          # 移除 mu-lu.md 中的自引用
           sed -i '/\* \[目录\](mu-lu.md)/d' docs/mu-lu.md
-          echo "已移除 mu-lu.md 中的自引用"
+          # 移除 SUMMARY.md 中的自引用  
+          sed -i '/\* \[目录\](mu-lu.md)/d' docs/SUMMARY.md
+          echo "已移除自引用链接"
       - name: Install dependencies
         run:  bun install
       - name: Build with VitePress
